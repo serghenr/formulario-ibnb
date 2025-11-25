@@ -1,0 +1,99 @@
+O que eu li
+Li os arquivos do projeto:
+
+index.html — estrutura do formulário e marcação.
+script.js — validação, gravação e comportamento de envio (usa localStorage).
+styles.css — estilos, layout e responsividade.
+Como o formulário foi criado (resumo técnico)
+Estrutura HTML (index.html):
+
+Container principal com header, descrição e um input de e‑mail no topo (<input id="emailInput" type="email">).
+Formulário com id formulario contendo:
+Campo de nome obrigatório: <input id="nome" name="nome" required> (validação adicional em JS exige nome + sobrenome).
+Grupo de opções (radio) name="tema" com 4 opções (3 temas pré-definidos + opção "Prefiro sugerir outro") — é obrigatório.
+Campo opcional textarea id sugestao para sugerir outro tema.
+Botões Enviar (submit) e Limpar (reset).
+Div #successMessage para mostrar feedback de sucesso.
+Script incluído no fim: <script src="script.js"></script>.
+Estilos (styles.css):
+
+Tema visual com gradiente de fundo e cartão branco centralizado (.container).
+Estilos para inputs, textarea, radio, mensagens de erro (.error-message) e sucesso (.success-message).
+Estados de erro (bordas vermelhas / fundo claro) e responsividade para telas pequenas.
+Comportamento JavaScript (script.js):
+
+Escuta do evento submit em #formulario — e.preventDefault() para controlar o envio via JS.
+Validações:
+nome obrigatório e deve conter pelo menos duas palavras (verificação por split(' ').length < 2).
+email é opcional, mas se preenchido deve passar por regex (isValidEmail).
+tema (radio) obrigatório.
+Em caso de erro: exibe mensagens em elementos .error-message (showError) e adiciona classe .error aos inputs.
+Em caso de sucesso:
+Monta formData com campos e timestamp (via new Date().toLocaleString('pt-BR')).
+Salva no localStorage sob a chave formularioSubmissions (array JSON).
+Exibe #successMessage e reseta o formulário após ~3s.
+Hooks adicionais:
+Validação em blur para nome e email.
+Exporta funções para console: viewAllSubmissions() e clearAllData().
+Onde os dados vão (importante)
+Atualmente os envios são salvos no navegador (localStorage). Não há envio para servidor/back-end.
+Chave usada: formularioSubmissions (JSON-serializado array de objetos).
+Como usar o formulário (passo a passo)
+Abra o projeto no navegador:
+Método rápido: abra index.html diretamente (duplo clique) ou sirva a pasta localmente e acesse via http.
+Para servir localmente (recomendado), execute no diretório do projeto:
+# Em zsh (executar no terminal dentro de /home/shr/VScodeprojects/formulario-ibnb)
+python3 -m http.server 8000
+
+Depois abra: http://localhost:8000
+Preencher o formulário:
+
+(Opcional) No topo, informe seu e‑mail (se quiser que seja validado; caso contrário, deixe em branco).
+Em "Nome e sobrenome" digite nome + sobrenome (ex.: "João Silva") — campo obrigatório.
+Selecione uma das opções de tema (obrigatório).
+Se desejar, escreva uma sugestão no campo "sugestao".
+Clique em "Enviar".
+Resultado esperado:
+
+Se houver erros de validação, mensagens vermelhas aparecem próximo aos campos.
+Em caso de sucesso, aparece a caixa verde com "Formulário enviado com sucesso!" e o formulário é limpo após ~3s.
+Ver dados salvos (para teste / inspeção):
+
+Abra o Console do DevTools (F12) e digite:
+// Mostrar todas as submissões (retorna array)
+viewAllSubmissions();
+
+// Ou diretamente via localStorage
+JSON.parse(localStorage.getItem('formularioSubmissions') || '[]');
+
+// Apagar todos os dados de teste
+clearAllData();
+
+Observações rápidas sobre validação/UX
+Validação do nome é no cliente e exige pelo menos duas palavras; usuários com nomes simples podem ter problemas.
+Email é opcional — se quer obrigar email, ajuste HTML/JS.
+Nada é enviado ao servidor; se você precisa centralizar respostas, será necessário um endpoint (fetch POST).
+Sugestões de melhorias (próximos passos)
+Persistência real:
+Adicionar endpoint no servidor (por exemplo, POST /api/submissions) e enviar via fetch para guardar em banco.
+Acessibilidade:
+Adicionar atributos ARIA, associar labels corretamente (já há labels, mas melhorar foco/controle para leitores de tela).
+UX:
+Desabilitar botão de submit enquanto grava (evita cliques duplos).
+Mostrar indicador de carregamento / contador de submissões.
+Validação:
+Melhorar checagem de nomes (aceitar monônimos ou validar com regex mais robusta).
+Confirmar e-mail com verificação de domínio se necessário.
+Export/Relatórios:
+Botão para exportar submissões para CSV.
+Testes:
+Pequenos testes unitários para funções de validação (isValidEmail, validação de nome).
+Segurança:
+Se migrar para servidor, sanitize/escapar entradas antes de persistir.
+Resumo / conclusão
+O formulário está pronto para uso local e salva entradas no localStorage (sem back-end).
+Para testar localmente, recomendo servir a pasta com python3 -m http.server 8000 e usar viewAllSubmissions() no console para inspecionar resultados.
+Quer que eu:
+Implemente envio para um endpoint de exemplo (mock) e mostre o código?
+Adicione um botão "Exportar CSV" que gera um arquivo a partir do localStorage?
+Torne o email obrigatório e atualize validações?
