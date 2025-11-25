@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IGREJA BATISTA NOVA BEREIA - Tema 2026</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>IGREJA BATISTA NOVA BEREIA</h1>
+            <h2>Tema para o ano de 2026</h2>
+        </div>
+
+        <!-- Email Box -->
+        <div class="email-box">
+            <input 
+                type="email" 
+                id="emailInput" 
+                placeholder="Digite seu e-mail" 
+                class="email-input"
+            >
+        </div>
+
+        <!-- Description -->
+        <div class="description">
+            <p>Esta enquete visa definir o tema anual para 2026, que será trabalhado e ministrado em toda a nossa igreja a partir do próprio olhar e sensibilidade de nossos membros e agregados.</p>
+        </div>
+
+        <!-- Form -->
+        <form id="formulario" class="form-container">
+            <!-- Question 1: Name -->
+            <div class="form-section">
+                <label for="nome" class="question-label">
+                    Nome e sobrenome
+                    <span class="required-asterisk">*</span>
+                </label>
+                <input 
+                    type="text" 
+                    id="nome" 
+                    name="nome" 
+                    class="text-input"
+                    placeholder="Digite seu nome completo"
+                    required
+                >
+                <span class="error-message" id="nomeError"></span>
+            </div>
+
+            <!-- Question 2: Theme Selection -->
+            <div class="form-section">
+                <label class="question-label">
+                    Qual dos temas abaixo você gostaria que fosse abordado no ano de 2026?
+                    <span class="required-asterisk">*</span>
+                </label>
+                
+                <div class="radio-group">
+                    <div class="radio-item">
+                        <input 
+                            type="radio" 
+                            id="tema1" 
+                            name="tema" 
+                            value="Ano da Restauração"
+                            required
+                        >
+                        <label for="tema1" class="radio-label">Ano da Restauração</label>
+                    </div>
+
+                    <div class="radio-item">
+                        <input 
+                            type="radio" 
+                            id="tema2" 
+                            name="tema" 
+                            value="Ano da Unidade"
+                            required
+                        >
+                        <label for="tema2" class="radio-label">Ano da Unidade</label>
+                    </div>
+
+                    <div class="radio-item">
+                        <input 
+                            type="radio" 
+                            id="tema3" 
+                            name="tema" 
+                            value="Ano da Comunhão"
+                            required
+                        >
+                        <label for="tema3" class="radio-label">Ano da Comunhão</label>
+                    </div>
+
+                    <div class="radio-item">
+                        <input 
+                            type="radio" 
+                            id="tema4" 
+                            name="tema" 
+                            value="Prefiro sugerir outro"
+                            required
+                        >
+                        <label for="tema4" class="radio-label">Prefiro sugerir outro</label>
+                    </div>
+                </div>
+                <span class="error-message" id="temaError"></span>
+            </div>
+
+            <!-- Question 3: Suggestion (Optional) -->
+            <div class="form-section">
+                <label for="sugestao" class="question-label">
+                    Se você quiser sugerir outro tema que não está nas opções acima, escreva abaixo:
+                    <span class="optional-label">(OPCIONAL)</span>
+                </label>
+                <textarea 
+                    id="sugestao" 
+                    name="sugestao" 
+                    class="textarea-input"
+                    placeholder="Digite sua sugestão de tema aqui..."
+                    rows="4"
+                ></textarea>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-actions">
+                <button type="submit" class="submit-button">Enviar</button>
+                <button type="reset" class="reset-button">Limpar</button>
+            </div>
+
+            <!-- Success Message -->
+            <div id="successMessage" class="success-message" style="display: none;">
+                <p>✓ Formulário enviado com sucesso!</p>
+            </div>
+        </form>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>Agradecemos sua participação na construção do tema de 2026!</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
